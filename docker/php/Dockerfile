@@ -27,7 +27,9 @@ RUN apk add --no-cache \
         pcntl \
         bcmath \
         gd \
-        intl
+        intl \
+    && pecl install redis \
+    && docker-php-ext-enable redis
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

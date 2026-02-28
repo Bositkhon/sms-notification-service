@@ -28,40 +28,19 @@ class SmsProviderRepository
 
     public function update(
         SmsProvider $provider,
-        ?string $name = null,
-        ?string $slug = null,
-        ?string $apiKey = null,
-        ?string $baseUrl = null,
-        ?array $credentials = null,
-        ?bool $isActive = null
+        string $name,
+        string $apiKey,
+        string $baseUrl,
+        array $credentials,
+        bool $isActive
     ) {
-        $attributes = [];
-
-        if ($name) {
-            $attributes['name'] = $name;
-        }
-
-        if ($slug) {
-            $attributes['slug'] = $slug;
-        }
-
-        if ($apiKey) {
-            $attributes['api_key'] = $apiKey;
-        }
-
-        if ($baseUrl) {
-            $attributes['base_url'] = $baseUrl;
-        }
-
-        if ($credentials) {
-            $attributes['credentials'] = $credentials;
-        }
-
-        if ($isActive) {
-            $attributes['is_active'] = $isActive;
-        }
-
-        $provider->update($attributes);
+        $provider->update([
+            'name' => $name,
+            'api_key' => $apiKey,
+            'base_url' => $baseUrl,
+            'credentials' => json_encode($credentials),
+            'is_active' => $isActive,
+        ]);
     }
 
     public function create(

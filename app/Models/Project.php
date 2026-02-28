@@ -14,6 +14,13 @@ class Project extends Model
     /** @use HasFactory<\Database\Factories\ProjectFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'description',
+        'api_key',
+        'sms_provider_id'
+    ];
+
     public function smsProvider()
     {
         return $this->belongsTo(SmsProvider::class, 'sms_provider_id');

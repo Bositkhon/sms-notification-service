@@ -23,7 +23,8 @@ class SendSmsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'to' => ['required', 'string'],
+            'to' => ['required', 'array'],
+            'to.*' => ['required', 'string', 'regex:/^\+998(?:[35789]\d)\d{7}$/'],
             'message' => ['required', 'string'],
         ];
     }

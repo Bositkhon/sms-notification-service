@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSmsProviderRequest extends FormRequest
+class UpdateProjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,9 @@ class UpdateSmsProviderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'api_key' => 'required|string',
-            'base_url' => 'required|url',
-            'credentials' => 'required|array',
-            'is_active' => 'required|boolean'
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'sms_provider_id' => 'required|exists:sms_providers,id',
         ];
     }
 }
