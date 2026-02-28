@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\SmsProviderSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +16,6 @@ class Project extends Model
 
     public function smsProvider()
     {
-        return $this->belongsTo(SmsProviderSlug::class, 'sms_provider_id');
+        return $this->belongsTo(SmsProvider::class, 'sms_provider_id');
     }
 }

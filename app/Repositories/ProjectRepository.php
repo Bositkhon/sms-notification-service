@@ -18,4 +18,9 @@ class ProjectRepository
             'sms_provider' => $provider->value
         ]);
     }
+
+    public function getById(int $id)
+    {
+        return Project::query()->find($id);
+    }
 }
