@@ -2,8 +2,10 @@
 
 namespace App\Services\Sms;
 
+use App\DTOs\SmsSendResult;
 use App\Factories\SmsProviderFactory;
 use App\Models\Project;
+use GuzzleHttp\Exception\BadResponseException;
 
 class SmsService
 {
@@ -15,8 +17,16 @@ class SmsService
     public function send(Project $project, string $to, string $message)
     {
         $provider = $this->smsProviderFactory->forProject($project);
-        
-        $result = $provider->send($to, $message);
+
+        try {
+            $result = $provider->send($to, $message);
+        } catch (BadResponseException $exception) {
+            $result = new SmsSendResult(
+                success: false,
+                errorMessage: $exception->getMessage(),
+                rawResponse: $exception->getResponse()?->getBody()->getContents()
+            );
+        }
 
         return $result;
     }
