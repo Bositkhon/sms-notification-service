@@ -19,6 +19,7 @@ class ProjectSeeder extends Seeder
             ->insert([
                 'name' => 'Main',
                 'description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem, vel?',
+                'api_key' => 'test',
                 'sms_provider_id' => $twilioProviderId,
                 'created_at' => now(),
                 'updated_at' => now()

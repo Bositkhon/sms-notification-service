@@ -1,0 +1,16 @@
+POST http://localhost/api/sms/send
+X-Api-Key: test
+Accept: application/json
+Content-Type: application/json
+
+{
+    "to": "+998998806666",
+    "message": "tes"
+}
+
+###
+
+GET http://localhost/api/sms/messages?created_from=2026-02-28T01:01:01&created_to=2026-02-29T23:59:50
+X-Api-Key: test
+Accept: application/json
+Content-Type: application/json

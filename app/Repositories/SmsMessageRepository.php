@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Enums\SmsMessageStatus;
 use App\Models\SmsMessage;
+use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class SmsMessageRepository
@@ -24,11 +25,13 @@ class SmsMessageRepository
         }
 
         if (!empty($filters['created_from'])) {
-            $query->whereDate('created_at', '>=', $filters['created_from']);
+            $createdFrom = Carbon::parse($filters['created_from']);
+            $query->where('created_at', '>=', $createdFrom);
         }
 
         if (!empty($filters['created_to'])) {
-            $query->whereDate('created_at', '<=', $filters['created_to']);
+            $createdTo = Carbon::parse($filters['created_to']);
+            $query->where('created_at', '<=', $createdTo);
         }
 
         return $query->paginate($filters['per_page'] ?? $perPage);

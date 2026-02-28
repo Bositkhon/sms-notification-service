@@ -30,9 +30,9 @@ class SendSmsJob implements ShouldQueue
         $result = $smsService->send($project, $this->to, $this->message);
 
         if ($result->success) {
-            $smsLifecycleService->markAsSent($this->projectId, $this->to, $this->message, $result);
+            $smsLifecycleService->markAsSent($this->projectId, $this->to, $this->message, $result->messageId);
         } else {
-            $smsLifecycleService->markAsFailed($this->projectId, $this->to, $this->message, $result);
+            $smsLifecycleService->markAsFailed($this->projectId, $this->to, $this->message, $result->messageId);
         }
     }
 }
